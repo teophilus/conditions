@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Select, Button, Icon, Radio } from 'antd';
+import { Form, Input, Select, Button, Radio, Icon, Row } from 'antd';
 import ConditionField from './ConditionField';
 const FormItem = Form.Item;
 
@@ -24,6 +24,7 @@ class Demo extends Component {
   }
 
   remove = (k) => {
+    uuid--;
     const { form } = this.props;
     // can use data-binding to get
     const keys = form.getFieldValue('keys');
@@ -84,19 +85,36 @@ class Demo extends Component {
           label={`Condition ${k}`}
           required={false}
           key={k}
+          style={{ paddingTop: 50 }}
         >
           {getFieldDecorator(`condition-${k}`, {
             initialValue: { },
             rules: [{ validator: this.checkMetafield, required: true }],
-          })(<ConditionField />)}
-          {keys.length > 0 ? (
-            <Icon
-              className="dynamic-delete-button"
-              type="minus-circle-o"
-              disabled={keys.length === 0}
-              onClick={() => this.remove(k)}
-            />
-          ) : null}
+          })(<Row align="bottom">
+              <span
+                style={{
+                  textAlign: 'center',
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  position: 'absolute',
+                  top: '-50px',
+                }}>
+              <Radio.Group defaultValue="and" size="small">
+                <Radio.Button value="and">AND</Radio.Button>
+                <Radio.Button value="or">OR</Radio.Button>
+              </Radio.Group>
+              </span>
+              <ConditionField />
+              {keys.length > 0 ? (
+                <Icon
+                  className="dynamic-delete-button"
+                  type="minus-circle-o"
+                  disabled={keys.length === 0}
+                  onClick={() => this.remove(k)}
+                />
+              ) : null}
+            </Row>)}
         </FormItem>
       );
     });
@@ -118,15 +136,11 @@ class Demo extends Component {
 
         {formItems}
 
-        <FormItem>
-          <Radio.Group defaultValue="horizontal" size="small">
-            <Radio.Button value="and">AND</Radio.Button>
-            <Radio.Button value="or">OR</Radio.Button>
-          </Radio.Group>
-        </FormItem>
-
-        <FormItem {...formItemLayoutWithOutLabel}>
-          <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
+        <FormItem
+          {...formItemLayoutWithOutLabel}
+          style={{ textAlign: 'center' }}
+        >
+          <Button type="dashed" onClick={this.add} style={{ width: '60%', cursor: 'pointer' }}>
             <Icon type="plus" /> Add Condition
           </Button>
         </FormItem>
