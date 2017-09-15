@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { Form, Input, Select, Button } from 'antd';
+import { Select } from 'antd';
 const Option = Select.Option;
 
 const style = {
   col: {
-    width: '30%',
+    width: '29%',
     marginRight: '3%',
   },
   lastCol: {
-    width: '30%',
+    width: '29%',
+    marginRight: '3%',
   }
 }
 
