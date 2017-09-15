@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Form, Input, Select, Button } from 'antd';
+import ConditionFieldDateSelect from './ConditionFieldDateSelect';
+import ConditionFieldBooleanSelect from './ConditionFieldBooleanSelect';
 const Option = Select.Option;
+
 
 const style = {
   col: {
@@ -12,6 +15,11 @@ const style = {
   }
 }
 
+const components = {
+  Date: ConditionFieldDateSelect,
+  Boolean: ConditionFieldBooleanSelect
+};
+
 class ConditionField extends Component {
   constructor(props) {
     super(props);
@@ -21,11 +29,10 @@ class ConditionField extends Component {
       metafield: value.metafield,
       condition: value.condition,
       metafieldValue: value.metafieldValue,
-      metadataType: 'Date',
-      conditionOptions: []
+      metadataType: 'Date'
     };
   }
-  
+
   componentWillReceiveProps(nextProps) {
     // Should be a controlled component.
     if ('value' in nextProps) {
@@ -69,55 +76,8 @@ class ConditionField extends Component {
     const state = this.state;
     let metadataValueInput = null;
     let conditionOptions = null;
-    
-    switch (this.state.metadataType) {
-      case 'Text':
-      break;
-      case 'Date':
-        conditionOptions = <Select
-          style={style.col}
-          size={size}
-        >
-          <Option value="before">Before</Option>
-          <Option value="after">After</Option>
-          <Option value="equal">Equal to</Option>
-        </Select>
 
-        metadataValueInput = <Select
-          size={size}
-          value={state.metafieldValue}
-          style={style.lastCol}
-          onChange={this.handleMetafieldValueChange}
-          >
-            <Option value="">Now</Option>
-        </Select>
-      break;
-      case 'Numeric':
-      break;
-      case 'Dropdown':
-      break;
-      case 'Long Text':
-      break;
-      case 'Boolean':
-        conditionOptions = <Select
-          style={style.col}
-          size={size}
-        >
-          <Option value="equal">Equal to</Option>
-        </Select>
-
-        metadataValueInput = <Select
-          size={size}
-          value={state.metafieldValue}
-          style={style.lastCol}
-          onChange={this.handleMetafieldValueChange}
-        >
-          <Option value="true">True</Option>
-          <Option value="false">False</Option>  
-        </Select>
-      break;
-      default:
-    }
+    const SelectForType = components[this.state.metadataType];
     
     return (
       <span>
@@ -130,8 +90,13 @@ class ConditionField extends Component {
           <Option value="foo">Foo</Option>
           <Option value="bar">Bar</Option>
         </Select>
-        {conditionOptions}
-        {metadataValueInput}
+
+        <SelectForType
+          style={style}
+          size={size}
+          metafieldValue={this.state.metafieldValue}
+          onChange={this.state.handleMetafieldChange}
+        />
       </span>
     );
   }
