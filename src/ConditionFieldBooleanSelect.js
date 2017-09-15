@@ -8,6 +8,8 @@ const ConditionFieldBooleanSelect = function (props) {
       <Select
         size={props.size}
         style={props.style.col}
+        onChange={props.handleConditionChange}
+
       >
 
         <Option value="equal">Equal to</Option>
@@ -18,7 +20,7 @@ const ConditionFieldBooleanSelect = function (props) {
          size={props.size}
          value={props.metafieldValue}
          style={props.style.lastCol}
-         onChange={props.onChange}
+         onChange={props.handleMetafieldValueChange}
       >
          <Option value="true">True</Option>
          <Option value="false">False</Option>  

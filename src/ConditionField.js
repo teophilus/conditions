@@ -95,7 +95,8 @@ class ConditionField extends Component {
           style={style}
           size={size}
           metafieldValue={this.state.metafieldValue}
-          onChange={this.state.handleMetafieldChange}
+          handleMetafieldValueChange={this.handleMetafieldValueChange}
+          handleConditionChange={this.handleConditionChange}
         />
       </span>
     );

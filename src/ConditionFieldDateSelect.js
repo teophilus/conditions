@@ -8,6 +8,7 @@ const ConditionFieldDateSelect = function (props) {
       <Select
         size={props.size}
         style={props.style.col}
+        onChange={props.handleConditionChange}
       >
 
         <Option value="before">Before</Option>
@@ -20,10 +21,10 @@ const ConditionFieldDateSelect = function (props) {
          size={props.size}
          value={props.metafieldValue}
          style={props.style.lastCol}
-         onChange={props.onChange}
+         onChange={props.handleMetafieldValueChange}
       >
 
-        <Option value="">Now</Option>
+        <Option value="now">Now</Option>
       </Select>
     </span>
   );
