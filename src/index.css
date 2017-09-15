@@ -1,0 +1,9 @@
+body {
+  margin: 0;
+  padding: 40px;
+  font-family: sans-serif;
+}
+
+.ant-form-item-control-wrapper {
+	width: 600px;
+}
