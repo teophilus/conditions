@@ -126,7 +126,6 @@ class Demo extends Component {
           {...formItemLayout}
           label="Condition"
           required={false}
-
         >
           {getFieldDecorator('condition', {
             initialValue: { },
@@ -140,7 +139,7 @@ class Demo extends Component {
           {...formItemLayoutWithOutLabel}
           style={{ textAlign: 'center' }}
         >
-          <Button type="dashed" onClick={this.add} style={{ width: '60%', cursor: 'pointer' }}>
+          <Button type="dashed" onClick={this.add} style={{ width: '30%', cursor: 'pointer' }}>
             <Icon type="plus" /> Add Condition
           </Button>
         </FormItem>

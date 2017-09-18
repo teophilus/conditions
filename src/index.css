@@ -7,3 +7,11 @@ body {
 .ant-form-item-control-wrapper {
 	width: 600px;
 }
+
+.dynamic-delete-button {
+	cursor: pointer;
+}
+
+.dynamic-delete-button:hover {
+	color: red;
+}

@@ -7,7 +7,11 @@ const Option = Select.Option;
 
 const style = {
   col: {
-    width: '29%',
+    width: '34%',
+    marginRight: '3%',
+  },
+  col2: {
+    width: '26%',
     marginRight: '3%',
   },
   lastCol: {
@@ -87,6 +91,7 @@ class ConditionField extends Component {
           value={state.metafield}
           onChange={this.handleMetafieldChange}
           style={style.col}
+          placeholder="Select metadata field"
         >
           <Option value="foo">Foo</Option>
           <Option value="bar">Bar</Option>
