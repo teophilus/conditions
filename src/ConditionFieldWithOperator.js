@@ -29,7 +29,7 @@ class ConditionFieldWithOperator extends Component {
           <Radio.Button value="or">OR</Radio.Button>
         </Radio.Group>
         </span>
-        <ConditionField />
+        <ConditionField {...this.props} />
         {this.props.keys.length > 0 ? (
           <Icon
             className="dynamic-delete-button"
