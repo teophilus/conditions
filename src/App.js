@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Input, Select, Button, Radio, Icon, Row } from 'antd';
+import { Form, Button, Icon, Row } from 'antd';
 import ConditionField from './ConditionField';
+import ConditionFieldWithOperator from './ConditionFieldWithOperator';
 const FormItem = Form.Item;
 
 let uuid = 1;
@@ -97,32 +98,8 @@ class Demo extends Component {
         >
           {getFieldDecorator(`condition-${k}`, {
             initialValue: { },
-            rules: [{ validator: this.checkMetafield, validator: this.checkOperatorField, required: true }],
-          })(<Row align="bottom">
-              <span
-                style={{
-                  textAlign: 'center',
-                  width: '100%',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  position: 'absolute',
-                  top: '-50px',
-                }}>
-              <Radio.Group defaultValue="and" size="small">
-                <Radio.Button value="and">AND</Radio.Button>
-                <Radio.Button value="or">OR</Radio.Button>
-              </Radio.Group>
-              </span>
-              <ConditionField />
-              {keys.length > 0 ? (
-                <Icon
-                  className="dynamic-delete-button"
-                  type="minus-circle-o"
-                  disabled={keys.length === 0}
-                  onClick={() => this.remove(k)}
-                />
-              ) : null}
-            </Row>)}
+            rules: [{ exclusive: true, validator: this.checkMetafield, validator: this.checkOperatorField, required: true }],
+          })(<ConditionFieldWithOperator keys={keys} k={k} {...this.props} remove={this.remove} />)}
         </FormItem>
       );
     });
