@@ -25,7 +25,6 @@ const ConditionFieldDateSelect = function (props) {
          onChange={props.handleMetafieldValueChange}
          placeholder="Select value"
       >
-
         <Option value="now">Now</Option>
       </Select>
     </span>

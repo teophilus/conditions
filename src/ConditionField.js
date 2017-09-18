@@ -51,7 +51,6 @@ class ConditionField extends Component {
       this.setState({ metafield });
   }
   this.triggerChange({ metafield });
-    console.log(this.state);
   }
   
   handleConditionChange = (condition) => {

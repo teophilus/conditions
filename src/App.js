@@ -20,7 +20,15 @@ class Demo extends Component {
       callback();
       return;
     }
-    callback('Please select a Metadata field');
+    callback('Please select a metadata field');
+  }
+
+  checkOperatorField = (rule, value, callback) => {
+    if (value.condition != null) {
+      callback();
+      return;
+    }
+    callback('Please select a operator');
   }
 
   remove = (k) => {
@@ -89,7 +97,7 @@ class Demo extends Component {
         >
           {getFieldDecorator(`condition-${k}`, {
             initialValue: { },
-            rules: [{ validator: this.checkMetafield, required: true }],
+            rules: [{ validator: this.checkMetafield, validator: this.checkOperatorField, required: true }],
           })(<Row align="bottom">
               <span
                 style={{
@@ -129,7 +137,7 @@ class Demo extends Component {
         >
           {getFieldDecorator('condition', {
             initialValue: { },
-            rules: [{ validator: this.checkMetafield, required: true }],
+            rules: [{ validator: this.checkMetafield, validator: this.checkOperatorField, required: true }],
           })(<ConditionField />)}
         </FormItem>
 

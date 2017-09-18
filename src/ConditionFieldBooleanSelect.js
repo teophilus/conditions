@@ -10,10 +10,9 @@ const ConditionFieldBooleanSelect = function (props) {
         style={props.style.col2}
         onChange={props.handleConditionChange}
         placeholder="Select Operator"
+        defaultValue="equal"
       >
-
         <Option value="equal">Equal to</Option>
-
       </Select>
 
       <Select
