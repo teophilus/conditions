@@ -49,8 +49,8 @@ class ConditionField extends Component {
   handleMetafieldChange = (metafield) => {
     if (!('value' in this.props)) {
       this.setState({ metafield });
-  }
-  this.triggerChange({ metafield });
+    }
+    this.triggerChange({ metafield });
   }
   
   handleConditionChange = (condition) => {
