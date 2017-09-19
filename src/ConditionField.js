@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Select } from 'antd';
+import { Select, Row, Radio } from 'antd';
 import ConditionFieldDateSelect from './ConditionFieldDateSelect';
 import ConditionFieldBooleanSelect from './ConditionFieldBooleanSelect';
 const Option = Select.Option;
@@ -34,6 +34,7 @@ class ConditionField extends Component {
       metafield: value.metafield,
       condition: value.condition,
       metafieldValue: value.metafieldValue,
+      andOr: value.andOr,
       metadataType: 'Date'
     };
   }
@@ -66,6 +67,13 @@ class ConditionField extends Component {
     }
     this.triggerChange({ metafieldValue });
   }
+
+  handleAndOrChange = (andOr) => {
+    if (!('value' in this.props)) {
+      this.setState({ andOr });
+    }
+    this.triggerChange({ andOr });
+  }
   
   triggerChange = (changedValue) => {
     // Should provide an event to pass value to Form.
@@ -84,26 +92,49 @@ class ConditionField extends Component {
     const SelectForType = components[this.state.metadataType];
     
     return (
-      <span>
-        <Select
-          size={size}
-          value={state.metafield}
-          onChange={this.handleMetafieldChange}
-          style={style.col}
-          placeholder="Select metadata field"
+      <Row align="bottom">
+        <span
+          style={
+            (this.props.k > 0) ? {
+            textAlign: 'center',
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            position: 'absolute',
+            bottom: '55px',
+          } : null}
         >
-          <Option value="foo">Foo</Option>
-          <Option value="bar">Bar</Option>
-        </Select>
+          {this.props.k > 0 &&
+            <Radio.Group
+              size="small"
+              defaultValue="and"
+              value={state.andOr}
+              onChange={this.handleAndOrChange}
+            >
+              <Radio.Button value="and">AND</Radio.Button>
+              <Radio.Button value="or">OR</Radio.Button>
+            </Radio.Group>
+          }
+        </span>
+          <Select
+            size={size}
+            value={state.metafield}
+            onChange={this.handleMetafieldChange}
+            style={style.col}
+            placeholder="Select metadata field"
+          >
+            <Option value="foo">Foo</Option>
+            <Option value="bar">Bar</Option>
+          </Select>
 
-        <SelectForType
-          style={style}
-          size={size}
-          metafieldValue={this.state.metafieldValue}
-          handleMetafieldValueChange={this.handleMetafieldValueChange}
-          handleConditionChange={this.handleConditionChange}
-        />
-      </span>
+          <SelectForType
+            style={style}
+            size={size}
+            metafieldValue={this.state.metafieldValue}
+            handleMetafieldValueChange={this.handleMetafieldValueChange}
+            handleConditionChange={this.handleConditionChange}
+          />
+      </Row>
     );
   }
 }

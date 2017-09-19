@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Button, Icon, Row } from 'antd';
 import ConditionField from './ConditionField';
-import ConditionFieldWithOperator from './ConditionFieldWithOperator';
 const FormItem = Form.Item;
 
 let uuid = 0;
@@ -99,7 +98,7 @@ class Demo extends Component {
           {getFieldDecorator(`condition-${k}`, {
             initialValue: { },
             rules: [{ exclusive: true, validator: this.checkMetafield, validator: this.checkOperatorField, required: true }],
-          })(<ConditionFieldWithOperator keys={keys} k={k} {...this.props} remove={this.remove} />)}
+          })(<ConditionField k={k} />)}
         </FormItem>
       );
     });
