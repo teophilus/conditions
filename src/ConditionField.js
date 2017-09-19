@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Select, Row, Radio } from 'antd';
+import { Select, Row, Radio, Icon } from 'antd';
 import ConditionFieldDateSelect from './ConditionFieldDateSelect';
 import ConditionFieldBooleanSelect from './ConditionFieldBooleanSelect';
 const Option = Select.Option;
+const RadioGroup = Radio.Group;
 
 
 const style = {
@@ -34,7 +35,7 @@ class ConditionField extends Component {
       metafield: value.metafield,
       condition: value.condition,
       metafieldValue: value.metafieldValue,
-      andOr: value.andOr,
+      andOr: (this.props.k > 0) ? 'and' : value.andOr,
       metadataType: 'Date'
     };
   }
@@ -69,10 +70,11 @@ class ConditionField extends Component {
   }
 
   handleAndOrChange = (andOr) => {
-    if (!('value' in this.props)) {
+   //if (!('value' in this.props)) {
+      console.log('andOr fired!');
       this.setState({ andOr });
-    }
-    this.triggerChange({ andOr });
+    //}
+    this.triggerChange({ andOr: andOr.target.value });
   }
   
   triggerChange = (changedValue) => {
@@ -102,18 +104,17 @@ class ConditionField extends Component {
             justifyContent: 'center',
             position: 'absolute',
             bottom: '55px',
-          } : null}
+          } : null }
         >
           {this.props.k > 0 &&
-            <Radio.Group
+            <RadioGroup
               size="small"
-              defaultValue="and"
-              value={state.andOr}
+              value={ state.andOr }
               onChange={this.handleAndOrChange}
             >
-              <Radio.Button value="and">AND</Radio.Button>
+              <Radio.Button defaultChecked={true} value="and">AND</Radio.Button>
               <Radio.Button value="or">OR</Radio.Button>
-            </Radio.Group>
+            </RadioGroup>
           }
         </span>
           <Select
@@ -134,6 +135,16 @@ class ConditionField extends Component {
             handleMetafieldValueChange={this.handleMetafieldValueChange}
             handleConditionChange={this.handleConditionChange}
           />
+
+          {this.props.k > 0 ? (
+            <Icon
+              className="dynamic-delete-button"
+              type="minus-circle-o"
+              disabled={this.props.k === 0}
+              onClick={() => this.props.remove(this.props.k)}
+            />
+          ) : null}
+
       </Row>
     );
   }

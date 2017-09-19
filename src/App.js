@@ -98,7 +98,7 @@ class Demo extends Component {
           {getFieldDecorator(`condition-${k}`, {
             initialValue: { },
             rules: [{ exclusive: true, validator: this.checkMetafield, validator: this.checkOperatorField, required: true }],
-          })(<ConditionField k={k} />)}
+          })(<ConditionField k={k} remove={this.remove} />)}
         </FormItem>
       );
     });
