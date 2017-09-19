@@ -4,7 +4,7 @@ import ConditionField from './ConditionField';
 import ConditionFieldWithOperator from './ConditionFieldWithOperator';
 const FormItem = Form.Item;
 
-let uuid = 1;
+let uuid = 0;
 class Demo extends Component {
   
   handleSubmit = (e) => {
@@ -91,7 +91,7 @@ class Demo extends Component {
       return (
         <FormItem
           {...(formItemLayout)}
-          label={`Condition ${k}`}
+          label={`Condition`}
           required={false}
           key={k}
           style={{ paddingTop: 50 }}
